@@ -1,0 +1,56 @@
+<div class="container mt-5">
+        <div *ngFor="let user of topheadingDisplay; let i = index" class="box " >
+          <img [src]="user.picture.large" width="100%" />
+          <h5 class="mt-2 mb-2">{{user.name.title}} {{user.name.first}} {{user.name.last}}</h5>
+          <h5 class="mb-2">{{user.gender}}</h5>
+          <h5 class="mb-2">{{user.location.street.name}}, {{user.location.city}}, {{user.location.state}}, {{user.location.country}}</h5>
+          <h5 class="mb-2">{{user.email}}</h5>
+          <div class="line mb-2"></div>
+          <table class="table table-striped-columns" (mouseenter)="expandUser(user.email)"
+          (mouseleave)="collapseUser(user.email)">
+            <tr>
+                <td></td>
+                <td>Now</td>
+                <td>Max</td>
+                <td>Min</td>
+            </tr>
+            <tr>
+                <td>
+                  <i *ngIf="temperatureData[user.email]?.weathercode === 0" class="bi bi-sun"></i>
+                  <i *ngIf="temperatureData[user.email]?.weathercode === 1" class="bi bi-cloud-sun"></i>
+                  <i *ngIf="temperatureData[user.email]?.weathercode === 2" class="bi bi-cloud"></i>
+                  <i *ngIf="temperatureData[user.email]?.weathercode === 3" class="bi bi-clouds"></i>
+                  <i *ngIf="temperatureData[user.email]?.weathercode === 45" class="bi bi-cloud-fog"></i>
+                  <i *ngIf="temperatureData[user.email]?.weathercode === 48" class="bi bi-cloud-fog2"></i>
+                  <i *ngIf="temperatureData[user.email]?.weathercode === 51 || temperatureData[user.email]?.weathercode === 53 || temperatureData[user.email]?.weathercode === 55" class="bi bi-cloud-drizzle"></i>
+                  <i *ngIf="temperatureData[user.email]?.weathercode === 63 || temperatureData[user.email]?.weathercode === 61" class="bi bi-cloud-rain"></i>
+                  <i *ngIf="temperatureData[user.email]?.weathercode === 65" class="bi bi-cloud-rain-heavy"></i>
+                  <i *ngIf="temperatureData[user.email]?.weathercode === 66 || temperatureData[user.email]?.weathercode === 67" class="bi bi-cloud-sleet"></i>
+                  <i *ngIf="temperatureData[user.email]?.weathercode === 71 || temperatureData[user.email]?.weathercode === 73 || temperatureData[user.email]?.weathercode === 75" class="bi bi-cloud-snow"></i>
+                  <i *ngIf="temperatureData[user.email]?.weathercode === 77" class="bi bi-cloud-hail"></i>  
+                  <i *ngIf="temperatureData[user.email]?.weathercode === 80 || temperatureData[user.email]?.weathercode === 81 || temperatureData[user.email]?.weathercode === 82" class="bi bi-cloud-rain-heavy-fill"></i>
+                  <i *ngIf="temperatureData[user.email]?.weathercode === 85 || temperatureData[user.email]?.weathercode === 86" class="bi bi-cloud-snow-fill"></i> 
+                  <i *ngIf="temperatureData[user.email]?.weathercode === 95" class="bi bi-cloud-lightning"></i> 
+                  <i *ngIf="temperatureData[user.email]?.weathercode === 96 || temperatureData[user.email]?.weathercode === 99" class="bi bi-cloud-lightning-rain"></i>  
+                </td>
+                <td>{{ temperatureData[user.email]?.current }} °C</td>
+                <td>{{ temperatureData[user.email]?.max }} °C</td>
+                <td>{{ temperatureData[user.email]?.min }} °C</td>
+            </tr>
+          </table>
+          <div *ngIf="expandedUsers[user.email]">
+            <table class="table table-striped-columns">
+              <tr>
+                  <td>Time</td>
+                  <td>Temperature</td>
+              </tr>
+              <tr *ngFor="let temperature of temperatureData[user.email]?.temperature_2m; let i = index">
+                <td>{{i}}:00</td>
+                <td>{{ temperature }} °C</td>
+              </tr>
+            </table>
+          </div>          
+          <button type="button" (click)="onSaveClick(user)" class="btn btn-danger btn-sm mt-2 mb-2">Save</button>
+        </div>
+</div>
+

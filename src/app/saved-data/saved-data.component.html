@@ -1,0 +1,24 @@
+<div class="container mt-5">
+      <div class="box" *ngFor="let user of savedData">
+        <img [src]="user.user.picture.large" width="100%" />
+        <h5 class="mt-2 mb-2">{{ user.user.name.title }} {{ user.user.name.first }} {{ user.user.name.last }}</h5>
+        <h5 class="mb-2">{{ user.user.gender }}</h5>
+        <h5 class="mb-2">{{user.user.location.street.name}}, {{user.user.location.city}}, {{user.user.location.state}}, {{user.user.location.country}}</h5>
+        <h5 class="mb-2">{{user.user.email}}</h5>
+        <div class="line mb-2"></div>
+          <table class="table table-striped-columns">
+            <tr>
+                <td>Now</td>
+                <td>Max</td>
+                <td>Min</td>
+            </tr>
+            <tr>
+                <td>{{ user.temperature.current }} °C</td>
+                <td>{{ user.temperature.max }} °C</td>
+                <td>{{ user.temperature.min }} °C</td>
+            </tr>
+          </table>
+      </div>
+</div>
+
+
